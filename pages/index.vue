@@ -19,7 +19,7 @@ export default {
       indexName: 'hehe',
       searchClient: {
         search() {
-          Promise.resolve();
+          return Promise.resolve();
         },
       },
     }),
