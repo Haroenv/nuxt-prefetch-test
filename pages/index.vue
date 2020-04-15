@@ -5,9 +5,9 @@
       <AisConfigure :hits-per-page="hpp" />
       <AisSearchBox />
       <AisHits />
-      <AisIndex index-name="instant_search_rating_desc">
-        <AisSearchBox />
-        <AisHits />
+      <AisIndex index-name="instant_search_demo_query_suggestions">
+        <!-- <AisSearchBox /> -->
+        <!-- <AisHits /> -->
       </AisIndex>
     </AisContainer>
   </div>
