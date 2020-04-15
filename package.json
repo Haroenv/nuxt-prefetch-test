@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "fs": "^0.0.1-security",
+    "instantsearch.js": "^4.4.0",
     "module": "^1.2.5",
     "nuxt": "^2.0.0"
   },

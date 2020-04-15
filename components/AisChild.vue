@@ -1,6 +1,7 @@
 <template>
   <div>
-    I'm the child
+    <p>I'm the child.</p>
+    <p>props: {{ JSON.stringify(something) }}</p>
   </div>
 </template>
 
@@ -33,12 +34,7 @@ export default {
   },
 
   created() {
-    console.log('child created');
-    console.log('child created - widgetParams', this.widgetParams);
-
     const parent = this.getParentIndex();
-
-    console.log('child created - instantSearchInstance', parent);
 
     parent.addWidgets([
       {
