@@ -2,7 +2,7 @@
   <div class="container">
     I am root.
     <AisContainer>
-      <AisChild :something="dynamic" />
+      <AisChild :hits-per-page="hpp" />
     </AisContainer>
   </div>
 </template>
@@ -17,6 +17,11 @@ export default {
   mixins: [
     createServerRootMixin({
       indexName: 'hehe',
+      searchClient: {
+        search() {
+          Promise.resolve();
+        },
+      },
     }),
   ],
   components: {
@@ -25,9 +30,7 @@ export default {
   },
   data() {
     return {
-      dynamic: {
-        yes: true,
-      },
+      hpp: 5,
     };
   },
   serverPrefetch() {

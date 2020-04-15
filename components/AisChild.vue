@@ -1,13 +1,15 @@
 <template>
   <div>
     <p>I'm the child.</p>
-    <p>props: {{ JSON.stringify(something) }}</p>
+    <p>props: {{ JSON.stringify(hitsPerPage) }}</p>
   </div>
 </template>
 
 <script>
+import { connectConfigure } from 'instantsearch.js/es/connectors';
+
 export default {
-  props: ['something'],
+  props: ['hitsPerPage'],
   inject: {
     instantSearchInstance: {
       from: '$_ais_instantSearchInstance',
@@ -28,7 +30,9 @@ export default {
   computed: {
     widgetParams() {
       return {
-        something: this.something,
+        searchParameters: {
+          hitsPerPage: this.hitsPerPage,
+        },
       };
     },
   },
@@ -36,12 +40,9 @@ export default {
   created() {
     const parent = this.getParentIndex();
 
-    parent.addWidgets([
-      {
-        $$type: 'ais.child',
-        widgetParams: this.widgetParams,
-      },
-    ]);
+    const widget = connectConfigure();
+
+    parent.addWidgets([widget(this.widgetParams)]);
   },
 };
 </script>

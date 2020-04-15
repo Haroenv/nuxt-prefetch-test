@@ -6,8 +6,6 @@
 </template>
 
 <script>
-import Vue from 'vue';
-
 export default {
   inject: {
     instantSearchInstance: {
@@ -19,11 +17,5 @@ export default {
       $_ais_instantSearchInstance: this.instantSearchInstance,
     };
   },
-  // ssr gets this injected
-  // data() {
-  //   return {
-  //     instantSearchInstance: createFakeInstance(),
-  //   };
-  // },
 };
 </script>
