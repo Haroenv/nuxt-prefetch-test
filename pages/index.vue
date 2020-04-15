@@ -2,31 +2,44 @@
   <div class="container">
     I am root.
     <AisContainer>
-      <AisChild :hits-per-page="hpp" />
+      <AisConfigure :hits-per-page="hpp" />
+      <AisSearchBox />
+      <AisHits />
+      <AisIndex index-name="instant_search_rating_desc">
+        <AisSearchBox />
+        <AisHits />
+      </AisIndex>
     </AisContainer>
   </div>
 </template>
 
 <script>
+import algoliasearch from 'algoliasearch/lite';
+
 import AisContainer from '~/components/AisContainer.vue';
-import AisChild from '~/components/AisChild.vue';
+import AisConfigure from '~/components/AisConfigure.vue';
+import AisSearchBox from '~/components/AisSearchBox.vue';
+import AisIndex from '~/components/AisIndex.vue';
+import AisHits from '~/components/AisHits.vue';
 
 import { createServerRootMixin } from '../lib/instantsearch';
 
 export default {
   mixins: [
     createServerRootMixin({
-      indexName: 'hehe',
-      searchClient: {
-        search() {
-          return Promise.resolve();
-        },
-      },
+      indexName: 'instant_search',
+      searchClient: algoliasearch(
+        'latency',
+        '6be0576ff61c053d5f9a3225e2a90f76'
+      ),
     }),
   ],
   components: {
     AisContainer,
-    AisChild,
+    AisConfigure,
+    AisHits,
+    AisSearchBox,
+    AisIndex,
   },
   data() {
     return {

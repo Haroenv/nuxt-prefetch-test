@@ -12,6 +12,7 @@
     "generate": "nuxt generate"
   },
   "dependencies": {
+    "algoliasearch": "^4.1.0",
     "fs": "^0.0.1-security",
     "instantsearch.js": "^4.4.0",
     "module": "^1.2.5",
