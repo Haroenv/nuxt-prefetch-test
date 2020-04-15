@@ -56,19 +56,26 @@ export default {
         if (err) reject(err);
         resolve(res);
       })
-    ).then(res => {
-      console.log('serverPrefetch - result', res);
-      console.log(
-        'serverPrefetch - instantSearchInstance',
-        app.instantSearchInstance
-      );
-      console.log(
-        'serverPrefetch - widgets',
-        app.instantSearchInstance.widgets
-      );
-      console.log('serverPrefetch - done');
-      console.log('---------------------');
-    });
+    )
+      .then(res => {
+        console.log('serverPrefetch - result', res);
+        console.log(
+          'serverPrefetch - instantSearchInstance',
+          app.instantSearchInstance
+        );
+        console.log(
+          'serverPrefetch - widgets',
+          app.instantSearchInstance.widgets
+        );
+      })
+      .then(() => {
+        console.log(
+          'serverPrefetch - TODO',
+          "actually search here, but that's irrelevant for now"
+        );
+        console.log('serverPrefetch - done');
+        console.log('---------------------');
+      });
   },
 };
 </script>
