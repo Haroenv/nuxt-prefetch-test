@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    I am ideal :)
+    I am root.
     <AisContainer>
       <AisChild :something="dynamic" />
     </AisContainer>
