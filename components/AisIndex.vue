@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="widget">
     je suis index {{ indexName }}
     <slot />
   </div>

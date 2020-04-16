@@ -1,7 +1,9 @@
 <template>
-  <div>
-    <p>I'm the child.</p>
-    <p>props: {{ JSON.stringify(hitsPerPage) }}</p>
+  <div
+    class="widget"
+    v-if="state"
+  >
+    <pre>configure: {{ JSON.stringify(widgetParams.searchParameters, null, 2) }}</pre>
   </div>
 </template>
 

@@ -2,12 +2,12 @@
   <div class="container">
     I am root.
     <AisInstantSearch>
-      <!-- <AisConfigure :hits-per-page="hpp" /> -->
-      <!-- <AisSearchBox /> -->
+      <AisConfigure :hits-per-page="hpp" />
+      <AisSearchBox />
       <AisHits />
       <AisIndex index-name="instant_search_demo_query_suggestions">
         <!-- <AisSearchBox /> -->
-        <!-- <AisHits /> -->
+        <AisHits />
       </AisIndex>
     </AisInstantSearch>
   </div>
@@ -34,7 +34,7 @@ export default {
       ),
       initialUiState: {
         instant_search: {
-          query: 'lol',
+          query: 'q',
         },
       },
     }),
@@ -56,3 +56,11 @@ export default {
   },
 };
 </script>
+
+<style>
+.widget {
+  border: 1px solid black;
+  padding: .5em;
+  margin: 1em;
+}
+</style>

@@ -1,11 +1,16 @@
 <template>
-  <div v-if="state">
+  <div
+    class="widget"
+    v-if="state"
+  >
     <p>hits</p>
     <ol>
       <li
-        v-for="object in state.hits"
-        :key="object.objectID"
-      > {{ object.objectID }}</li>
+        v-for="hit in state.hits"
+        :key="hit.objectID"
+      >
+        {{ hit.objectID }} <img :src="hit.image" />
+      </li>
     </ol>
   </div>
 </template>
@@ -23,3 +28,9 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+img {
+  height: 1em;
+}
+</style>
