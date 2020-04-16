@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     I am root.
-    <AisContainer>
+    <AisInstantSearch>
       <AisConfigure :hits-per-page="hpp" />
       <AisSearchBox />
       <AisHits />
@@ -9,14 +9,14 @@
         <!-- <AisSearchBox /> -->
         <!-- <AisHits /> -->
       </AisIndex>
-    </AisContainer>
+    </AisInstantSearch>
   </div>
 </template>
 
 <script>
 import algoliasearch from 'algoliasearch/lite';
 
-import AisContainer from '~/components/AisContainer.vue';
+import AisInstantSearch from '~/components/AisInstantSearch.vue';
 import AisConfigure from '~/components/AisConfigure.vue';
 import AisSearchBox from '~/components/AisSearchBox.vue';
 import AisIndex from '~/components/AisIndex.vue';
@@ -35,7 +35,7 @@ export default {
     }),
   ],
   components: {
-    AisContainer,
+    AisInstantSearch,
     AisConfigure,
     AisHits,
     AisSearchBox,
@@ -47,9 +47,7 @@ export default {
     };
   },
   serverPrefetch() {
-    console.log(
-      'my own server prefetch gets called twice, once without vnode from home-made app'
-    );
+    console.log('my own server prefetch...');
   },
 };
 </script>
