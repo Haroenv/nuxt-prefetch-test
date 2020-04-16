@@ -2,8 +2,8 @@
   <div class="container">
     I am root.
     <AisInstantSearch>
-      <AisConfigure :hits-per-page="hpp" />
-      <AisSearchBox />
+      <!-- <AisConfigure :hits-per-page="hpp" /> -->
+      <!-- <AisSearchBox /> -->
       <AisHits />
       <AisIndex index-name="instant_search_demo_query_suggestions">
         <!-- <AisSearchBox /> -->
@@ -32,6 +32,11 @@ export default {
         'latency',
         '6be0576ff61c053d5f9a3225e2a90f76'
       ),
+      initialUiState: {
+        instant_search: {
+          query: 'lol',
+        },
+      },
     }),
   ],
   components: {

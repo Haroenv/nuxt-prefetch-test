@@ -26,7 +26,7 @@ export default {
     getParentIndex: {
       from: '$_ais_getParentIndex',
       default() {
-        return () => this.instantSearchInstance;
+        return () => this.instantSearchInstance.mainIndex;
       },
     },
   },

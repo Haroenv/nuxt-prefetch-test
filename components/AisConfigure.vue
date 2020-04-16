@@ -7,26 +7,11 @@
 
 <script>
 import { connectConfigure } from 'instantsearch.js/es/connectors';
+import { createWidgetMixin } from './widgetMixin';
 
 export default {
+  mixins: [createWidgetMixin({ connector: connectConfigure })],
   props: ['hitsPerPage'],
-  inject: {
-    instantSearchInstance: {
-      from: '$_ais_instantSearchInstance',
-      default() {
-        const tag = this.$options._componentTag;
-        throw new TypeError(
-          `It looks like you forgot to wrap your Algolia search component "<${tag}>" inside of an "<ais-instant-search>" component.`
-        );
-      },
-    },
-    getParentIndex: {
-      from: '$_ais_getParentIndex',
-      default() {
-        return () => this.instantSearchInstance;
-      },
-    },
-  },
   computed: {
     widgetParams() {
       return {
@@ -35,14 +20,6 @@ export default {
         },
       };
     },
-  },
-
-  created() {
-    const parent = this.getParentIndex();
-
-    const widget = connectConfigure();
-
-    parent.addWidgets([widget(this.widgetParams)]);
   },
 };
 </script>
