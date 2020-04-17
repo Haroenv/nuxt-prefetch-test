@@ -1,22 +1,23 @@
-# nuxt-example
+# InstantSearch SSR from scratch
 
-> My tiptop Nuxt.js project
+patches to make to InstantSearch.js:
 
-## Build Setup
+1. <node_modules/instantsearch.js/es/lib/InstantSearch.js> (line 92)
 
-```bash
-# install dependencies
-$ yarn install
-
-# serve with hot reload at localhost:3000
-$ yarn dev
-
-# build for production and launch server
-$ yarn build
-$ yarn start
-
-# generate static project
-$ yarn generate
+```diff
+    _defineProperty(_assertThisInitialized(_this), "scheduleSearch", defer(function () {
++      if (_this.started) {
+        _this.mainHelper.search();
++      }
+    }));
 ```
 
-For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
+2. <node_modules/instantsearch.js/es/widgets/index/index.js> (line 315)
+
+```diff
+  helper.on('change', function (_ref4) {
+    var state = _ref4.state;
++   if (!instantSearchInstance.started) {
++     return;
++   }
+```

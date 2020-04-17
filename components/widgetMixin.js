@@ -1,3 +1,5 @@
+import algoliaHelper from 'algoliasearch-helper';
+
 export function createWidgetMixin({ connector }) {
   if (typeof connector !== 'function' && connector !== true) {
     throw new Error(
@@ -40,25 +42,24 @@ export function createWidgetMixin({ connector }) {
 
       parent.addWidgets([this.widget]);
 
-      // todo: also during hydration
-      const isHydrating =
-        this.instantSearchInstance.hydrating &&
-        !this.instantSearchInstance.started; // should be hydrated && !started
       if (
-        (this.$isServer || isHydrating) &&
-        this.instantSearchInstance.__initialSearchResults
+        this.instantSearchInstance.__initialSearchResults &&
+        !this.instantSearchInstance.started
       ) {
         const helper = parent.getHelper();
 
-        // todo: move this code to index widget probably
-        const results = this.instantSearchInstance.__initialSearchResults[
+        // TODO: maybe move this code to index widget?
+        let results = this.instantSearchInstance.__initialSearchResults[
           parent.getIndexId()
         ];
 
-        // if (!results) {
-        //   // TODO: can't happen, but throw error in the future
-        //   return
-        // }
+        // TODO: maybe test differently, this happens in a deserialized form on client
+        if (results.constructor.name === 'Object') {
+          results = new algoliaHelper.SearchResults(
+            new algoliaHelper.SearchParameters(results._state),
+            results._rawResults
+          );
+        }
 
         const state = results._state;
 
@@ -66,15 +67,30 @@ export function createWidgetMixin({ connector }) {
         // parameters, because those are from the lastResults
         helper.state = state;
 
-        // console.log('widget', this.widget);
+        // TODO: copied from index widget
+        const createURL = nextState =>
+          this.instantSearchInstance._createURL({
+            [parent.getIndexId()]: parent
+              .getWidgets()
+              .filter(widget => !isIndexWidget(widget))
+              .reduce((uiState, widget) => {
+                if (!widget.getWidgetState) {
+                  return uiState;
+                }
+
+                return widget.getWidgetState(uiState, {
+                  searchParameters: nextState,
+                  helper: helper,
+                });
+              }, {}),
+          });
 
         this.widget.render({
           helper,
           results,
           state,
           templatesConfig: {},
-          // TODO: use memory or real router
-          createURL: () => '#',
+          createURL,
           instantSearchInstance: this.instantSearchInstance,
           searchMetadata: {
             isSearchStalled: false,

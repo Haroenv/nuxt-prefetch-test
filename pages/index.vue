@@ -53,10 +53,11 @@ export default {
   },
   beforeMount() {
     // TODO: find where the good place to read this is
-    const algoliaState = window.__NUXT__.algoliaState;
+    const results = window.__NUXT__.algoliaState;
+
+    this.hydrate(results);
   },
   serverPrefetch() {
-    console.log('server prefetch');
     return this.findResultState().then(algoliaState => {
       this.$ssrContext.nuxt.algoliaState = algoliaState;
     });
