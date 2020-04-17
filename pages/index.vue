@@ -51,10 +51,19 @@ export default {
       hpp: 5,
     };
   },
-  serverPrefetch() {
-    return this.findResultState();
-    console.log('my own server prefetch...');
+  beforeMount() {
+    // TODO: find where the good place to read this is
+    const algoliaState = window.__NUXT__.algoliaState;
   },
+  serverPrefetch() {
+    console.log('server prefetch');
+    return this.findResultState().then(algoliaState => {
+      this.$ssrContext.nuxt.algoliaState = algoliaState;
+    });
+  },
+  // fetch() {
+  //   this.hpp = 10;
+  // },
 };
 </script>
 

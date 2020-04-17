@@ -41,17 +41,25 @@ export function createWidgetMixin({ connector }) {
       parent.addWidgets([this.widget]);
 
       // todo: also during hydration
-      const isHydrating = true; // should be hydrated && !started
+      const isHydrating =
+        this.instantSearchInstance.hydrating &&
+        !this.instantSearchInstance.started; // should be hydrated && !started
       if (
         (this.$isServer || isHydrating) &&
-        this.instantSearchInstance.__lastResults
+        this.instantSearchInstance.__initialSearchResults
       ) {
         const helper = parent.getHelper();
 
         // todo: move this code to index widget probably
-        const results = this.instantSearchInstance.__lastResults[
+        const results = this.instantSearchInstance.__initialSearchResults[
           parent.getIndexId()
         ];
+
+        // if (!results) {
+        //   // TODO: can't happen, but throw error in the future
+        //   return
+        // }
+
         const state = results._state;
 
         // helper gets created in init, but that means it doesn't get the injected
