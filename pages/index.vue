@@ -52,6 +52,7 @@ export default {
     };
   },
   serverPrefetch() {
+    return this.findResultState();
     console.log('my own server prefetch...');
   },
 };
@@ -60,7 +61,7 @@ export default {
 <style>
 .widget {
   border: 1px solid black;
-  padding: .5em;
+  padding: 0.5em;
   margin: 1em;
 }
 </style>
