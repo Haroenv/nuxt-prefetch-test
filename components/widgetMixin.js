@@ -54,7 +54,7 @@ export function createWidgetMixin({ connector }) {
         ];
 
         // TODO: maybe test differently, this happens in a deserialized form on client
-        if (results.constructor.name === 'Object') {
+        if (results.__identifier === 'stringified') {
           results = new algoliaHelper.SearchResults(
             new algoliaHelper.SearchParameters(results._state),
             results._rawResults
@@ -67,7 +67,7 @@ export function createWidgetMixin({ connector }) {
         // parameters, because those are from the lastResults
         helper.state = state;
 
-        // TODO: copied from index widget
+        // TODO: copied from index widget, should be given to all widgets IMO
         const createURL = nextState =>
           this.instantSearchInstance._createURL({
             [parent.getIndexId()]: parent

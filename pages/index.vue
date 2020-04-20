@@ -114,7 +114,7 @@ export default {
       },
       initialUiState: {
         instant_search: {
-          query: 'amazon',
+          query: 'apple',
         },
         overrider: {
           query: 'q',
