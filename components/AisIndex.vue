@@ -1,6 +1,6 @@
 <template>
   <div class="widget">
-    index {{ indexName }}
+    {{ indexId }} - {{ indexName }}
     <slot />
   </div>
 </template>

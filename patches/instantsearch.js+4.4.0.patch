@@ -14,10 +14,21 @@ index 142f37c..09e4f2a 100644
  
      _defineProperty(_assertThisInitialized(_this), "scheduleRender", defer(function () {
 diff --git a/node_modules/instantsearch.js/es/widgets/index/index.js b/node_modules/instantsearch.js/es/widgets/index/index.js
-index b6ce713..e587199 100644
+index b6ce713..07a3783 100644
 --- a/node_modules/instantsearch.js/es/widgets/index/index.js
 +++ b/node_modules/instantsearch.js/es/widgets/index/index.js
-@@ -312,6 +312,11 @@ var index = function index(props) {
+@@ -152,7 +152,9 @@ var index = function index(props) {
+             widget.init({
+               helper: helper,
+               parent: _this,
+-              uiState: {},
++              // TODO: this is wrong if happens after something changes
++              // really we want the current global ui state, is that possible?
++              uiState: localInstantSearchInstance._initialUiState,
+               instantSearchInstance: localInstantSearchInstance,
+               state: helper.state,
+               templatesConfig: localInstantSearchInstance.templatesConfig,
+@@ -312,6 +314,11 @@ var index = function index(props) {
  
        helper.on('change', function (_ref4) {
          var state = _ref4.state;
